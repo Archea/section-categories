@@ -1,0 +1,13 @@
+query getAll {
+  assemblies {
+    edges {
+      node {
+        id: ID!
+        name: String!
+        description: String
+        productFamilies: [String]
+        category: String
+      }
+    }
+  }
+}

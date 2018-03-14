@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductFamilyList it at least shallow renders and match snapshot 1`] = `
+<div
+  className="ProductFamilyList"
+>
+  <h1 />
+  <ProductFamily
+    key="1"
+    productFamily={
+      Object {
+        "delimiter": "::",
+        "familyId": "1",
+        "id": "1",
+        "name": "bar",
+      }
+    }
+  />
+  <ProductFamily
+    key="2"
+    productFamily={
+      Object {
+        "delimiter": ":",
+        "familyId": "2",
+        "id": "2",
+        "name": "foosle",
+      }
+    }
+  />
+</div>
+`;

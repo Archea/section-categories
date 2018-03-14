@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+
+  omac-app:
+    container_name: omaclient
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '3300:3300'
+    environment:
+      - NODE_ENV=development

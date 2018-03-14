@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryList it at least shallow renders and match snapshot 1`] = `
+<div
+  className="SelectionArea"
+>
+  <div
+    className="CategoryList"
+  >
+    <withRouter(Category)
+      Category={
+        Object {
+          "id": "1",
+          "name": "bar",
+        }
+      }
+      key="1"
+    />
+    <withRouter(Category)
+      Category={
+        Object {
+          "id": "2",
+          "name": "foosle",
+        }
+      }
+      key="2"
+    />
+  </div>
+</div>
+`;

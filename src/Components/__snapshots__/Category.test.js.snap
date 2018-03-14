@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Category it at renders and matches snapshot 1`] = `
+<div>
+  <a
+    href="/Category/1"
+    onClick={[Function]}
+  >
+    <div>
+      bar
+    </div>
+  </a>
+</div>
+`;

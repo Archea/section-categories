@@ -1,0 +1,24 @@
+{
+  "props": {
+    "getAll": {
+      "allUniformatClassifications": [
+        {
+          "id": "1",
+          "name": "bar",
+          "prefix": "fixed",
+          "description": "a solid steele cylnder",
+          "category": "structural restraints",
+          "productFamilies": ["tough things", "cage stuff"]
+        },
+        {
+          "id": "2",
+          "name": "foosle",
+          "prefix": "fix",
+          "description": "a stone cylnder",
+          "category": "structural supports",
+          "productFamilies": ["tough things", "hard stuff"]
+        }
+      ]
+    }
+  }
+}
