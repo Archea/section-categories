@@ -4,7 +4,7 @@ class ProductFamily extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="ProductFamily">
           ({this.props.productFamily.familyId}){' '}
           {this.props.productFamily.delimiter} {this.props.productFamily.name}
         </div>

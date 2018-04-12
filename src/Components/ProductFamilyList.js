@@ -18,7 +18,7 @@ export class ProductFamilyList extends Component {
       .associatedFamilies
     return (
       <div className="ProductFamilyList">
-        <h1>{this.props.getAll.productFamilyCategory.name}</h1>
+        <h3>{this.props.getAll.productFamilyCategory.name}</h3>
         {ProductFamilysToRender.map(productFamily => (
           <ProductFamily key={productFamily.id} productFamily={productFamily} />
         ))}

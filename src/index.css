@@ -2,7 +2,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Verdana, Geneva, sans-serif;
 }
 
 input {
@@ -13,6 +12,9 @@ input {
   color: #828282;
 }
 
+.blue {
+  background-color: #019CDE;
+}
 .orange {
   background-color: #ff6600;
 }

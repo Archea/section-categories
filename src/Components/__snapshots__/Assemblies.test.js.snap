@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Assemblies it at least shallow renders and match snapshot 1`] = `
+<div
+  className="Assemblies"
+>
+  <AssemblyList
+    assemblies={
+      Array [
+        Object {
+          "category": "structural restraints",
+          "description": "a solid steele cylnder",
+          "id": "1",
+          "name": "bar",
+          "prefix": "fixed",
+          "productFamilies": Array [
+            "tough things",
+            "cage stuff",
+          ],
+        },
+        Object {
+          "category": "structural supports",
+          "description": "a stone cylnder",
+          "id": "2",
+          "name": "foosle",
+          "prefix": "fix",
+          "productFamilies": Array [
+            "tough things",
+            "hard stuff",
+          ],
+        },
+      ]
+    }
+  />
+</div>
+`;

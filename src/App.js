@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import CategoryList from './Components/CategoryList'
+import Assemblies from './Components/Assemblies'
 import Header from './Components/Header'
 import ProductFamilyList from './Components/ProductFamilyList'
 import { Switch, Route } from 'react-router-dom'
@@ -12,6 +13,7 @@ class App extends Component {
         <Header />
         <div className="SelectionArea">
           <Route exact path="/" component={CategoryList} />
+          <Route exact path="/Assemblies" component={Assemblies} />
           <Route path="/:area/:id" component={CategoryList} />
           <Route
             path="/Category/:id"

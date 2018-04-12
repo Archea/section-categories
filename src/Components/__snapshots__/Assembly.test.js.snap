@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Assembly it at renders and matches snapshot 1`] = `
+<div
+  className="Assembly"
+>
+  <div>
+    (
+    1
+    ) 
+    a18
+     
+    an assembly I guess
+  </div>
+</div>
+`;

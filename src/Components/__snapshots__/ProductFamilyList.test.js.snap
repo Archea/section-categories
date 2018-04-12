@@ -4,7 +4,7 @@ exports[`ProductFamilyList it at least shallow renders and match snapshot 1`] = 
 <div
   className="ProductFamilyList"
 >
-  <h1 />
+  <h3 />
   <ProductFamily
     key="1"
     productFamily={
