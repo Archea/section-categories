@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssemblyCrumb it at renders and matches snapshot 1`] = `
+<div
+  className="AssemblyCrumb"
+>
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      A
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      10
+    </button>
+    .
+    .
+    .
+    .
+  </div>
+</div>
+`;

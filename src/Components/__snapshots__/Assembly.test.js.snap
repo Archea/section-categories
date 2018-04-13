@@ -4,7 +4,9 @@ exports[`Assembly it at renders and matches snapshot 1`] = `
 <div
   className="Assembly"
 >
-  <div>
+  <div
+    onClick={[Function]}
+  >
     (
     1
     ) 

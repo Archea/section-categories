@@ -10,28 +10,31 @@ configure({ adapter: new Adapter() })
 describe('AssemblyList', () => {
   const mockAssemblies = [
     {
-      id: '1',
-      name: 'bar',
-      prefix: 'fixed',
-      description: 'a solid steele cylnder',
-      category: 'structural restraints',
-      productFamilies: ['tough things', 'cage stuff']
+      id: '63ef3b02-faa5-44f5-a677-99775fdaeffb',
+      description: 'SUBSTRUCTURE',
+      code: 'A',
+      level: 1
     },
     {
-      id: '2',
-      name: 'foosle',
-      prefix: 'fix',
-      description: 'a stone cylnder',
-      category: 'structural supports',
-      productFamilies: ['tough things', 'hard stuff']
+      id: '7777f4e9-bc0d-45cf-b66d-b97ad4638dc0',
+      description: 'FOUNDATIONS',
+      code: 'A10',
+      level: 2
     }
   ]
+  const mockSelected = {
+    id: '',
+    description: '',
+    code: '',
+    level: 0
+  }
   const mockGetAll = jest.fn
   const mockprops = {
     getAll: {
       allUniformatClassifications: mockAssemblies
     },
-    assemblies: mockAssemblies
+    assemblies: mockAssemblies,
+    selected: mockSelected
   }
   test('it at least shallow renders and match snapshot', () => {
     const wrapper = shallow(<AssemblyList {...mockprops} />)

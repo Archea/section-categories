@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
 class Assembly extends Component {
+  handleClick = () => this.props.onSelect(this.props.Assembly)
   render() {
     return (
       <div className="Assembly">
-        <div>
+        <div onClick={this.handleClick}>
           ({this.props.Assembly.level}) {this.props.Assembly.code}{' '}
           {this.props.Assembly.description}
         </div>

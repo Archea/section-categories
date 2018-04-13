@@ -4,32 +4,42 @@ exports[`Assemblies it at least shallow renders and match snapshot 1`] = `
 <div
   className="Assemblies"
 >
+  <AssemblyCrumb
+    onCrumb={[Function]}
+    selected={
+      Object {
+        "code": "",
+        "description": "",
+        "id": "",
+        "level": 0,
+      }
+    }
+  />
   <AssemblyList
     assemblies={
       Array [
         Object {
-          "category": "structural restraints",
-          "description": "a solid steele cylnder",
-          "id": "1",
-          "name": "bar",
-          "prefix": "fixed",
-          "productFamilies": Array [
-            "tough things",
-            "cage stuff",
-          ],
+          "code": "A",
+          "description": "SUBSTRUCTURE",
+          "id": "63ef3b02-faa5-44f5-a677-99775fdaeffb",
+          "level": 1,
         },
         Object {
-          "category": "structural supports",
-          "description": "a stone cylnder",
-          "id": "2",
-          "name": "foosle",
-          "prefix": "fix",
-          "productFamilies": Array [
-            "tough things",
-            "hard stuff",
-          ],
+          "code": "A10",
+          "description": "FOUNDATIONS",
+          "id": "7777f4e9-bc0d-45cf-b66d-b97ad4638dc0",
+          "level": 2,
         },
       ]
+    }
+    select={[Function]}
+    selected={
+      Object {
+        "code": "",
+        "description": "",
+        "id": "",
+        "level": 0,
+      }
     }
   />
 </div>

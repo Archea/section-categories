@@ -1,3 +1,16 @@
+/*
+If you are getting an eroror like this:
+ FAIL  src\App.test.js
+  ● Test suite failed to run
+
+    C:\dev\assemblies\node_modules\graphql\language\parser.mjs:10
+    import { Source } from './source';
+    ^^^^^^
+  its a problem with the tester trying to run the .mjs files that come in the graphql module, 
+  easiest fix to just delete them after you've yarn install 'ed
+*/
+
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { MemoryRouter } from 'react-router'
