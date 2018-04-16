@@ -11,10 +11,6 @@ class ProductFamily extends Component {
       </div>
     )
   }
-
-  _pickProductFamily = async () => {
-    // ... you'll implement this
-  }
 }
 
 export default ProductFamily

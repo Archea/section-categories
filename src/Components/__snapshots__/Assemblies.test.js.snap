@@ -4,6 +4,11 @@ exports[`Assemblies it at least shallow renders and match snapshot 1`] = `
 <div
   className="Assemblies"
 >
+  <button
+    onClick={[Function]}
+  >
+    Top
+  </button>
   <AssemblyCrumb
     onCrumb={[Function]}
     selected={

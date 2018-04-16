@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Category from './Category'
-import ProductFamilyList from './ProductFamilyList'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -17,7 +16,6 @@ export class CategoryList extends Component {
 
     const categoriesToRender = this.props.getAll.allProductFamilyCategories
     //When we need teh activeCategory can use below (if not null...)
-    //const activeCategory = this.props.match.params.id
     return (
       <div className="CategoryList">
         {categoriesToRender.map(category => (
@@ -27,7 +25,10 @@ export class CategoryList extends Component {
     )
   }
 }
-
+/*
+This query gets all the ProductFamilies aka sections from content20 db
+the 'name' is the section title, while the id is the mf section#
+*/
 const CATEGORIES_QUERY = gql`
   query GetAllPFC {
     allProductFamilyCategories {

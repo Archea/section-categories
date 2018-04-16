@@ -4,7 +4,7 @@ import CategoryList from './Components/CategoryList'
 import Assemblies from './Components/Assemblies'
 import Header from './Components/Header'
 import ProductFamilyList from './Components/ProductFamilyList'
-import { Switch, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class App extends Component {
   render() {

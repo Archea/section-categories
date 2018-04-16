@@ -8,8 +8,8 @@ import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { BrowserRouter } from 'react-router-dom'
-
 const httpLink = new HttpLink({
+  //This is the api end point that apollo will use to connect to graphql api
   uri: 'https://avitrucontent20api.azurewebsites.net/api/graphql'
 })
 const client = new ApolloClient({

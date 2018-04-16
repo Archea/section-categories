@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 class Assembly extends Component {
+  //this should prop function comes from Assemblies
   handleClick = () => this.props.onSelect(this.props.Assembly)
   render() {
     return (
@@ -11,10 +12,6 @@ class Assembly extends Component {
         </div>
       </div>
     )
-  }
-
-  _pickAssembly = async () => {
-    // ... you'll implement this
   }
 }
 
