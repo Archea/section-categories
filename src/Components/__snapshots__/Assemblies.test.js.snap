@@ -47,5 +47,8 @@ exports[`Assemblies it at least shallow renders and match snapshot 1`] = `
       }
     }
   />
+  <div>
+    none selected
+  </div>
 </div>
 `;

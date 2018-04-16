@@ -25,7 +25,7 @@ describe('ProductFamilyListA', () => {
   const mockGetAll = jest.fn
   const mockprops = {
     getAll: {
-      uniformatClassifications: {
+      uniformatClassification: {
         associatedFamilies: mocks
       }
     }

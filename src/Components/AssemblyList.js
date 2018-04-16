@@ -40,9 +40,9 @@ export class AssemblyList extends Component {
       )
     }
     //this should not be called in current architecture, but may be useful
+    //it just renders all of them
     return (
       <div className="AssemblyList">
-        //it just renders all of them
         {assembliesToRender.map(assembly => (
           <Assembly
             key={assembly.id}
