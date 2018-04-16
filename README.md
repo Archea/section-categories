@@ -3,6 +3,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
+Note: If you are getting an eroror like this:
+ FAIL  src\App.test.js
+  ● Test suite failed to run
+
+    C:\dev\assemblies\node_modules\graphql\language\parser.mjs:10
+    import { Source } from './source';
+    ^^^^^^
+  When running unit tests, its a problem with the tester trying to run the .mjs files that come in the graphql module, 
+  easiest fix to just delete them after you've yarn install 'ed
+  This is a known issues, hoping the either jest or graphql fixes it soon. You have to redo it every time you yarn install >.<
+
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
