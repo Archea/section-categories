@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import Autosuggest, {
-  AutosuggestHighlightMatch,
-  AutosuggestHighlightParse
-} from 'react-autosuggest'
+import Autosuggest from 'react-autosuggest'
+import AutosuggestHighlightMatch from 'autosuggest-highlight/match'
+import AutosuggestHighlightParse from 'autosuggest-highlight/parse'
 
 const initialState = {
   value: '',
@@ -43,37 +42,41 @@ const getSuggestions = (value, items) => {
     title: 'Sections',
     items: sectionsFiltered
   }
-  console.log({
-    categoriesSection,
-    assembliesSection,
-    sectionsSection
-  })
+
+  const productTypesFiltered = items.allProductTypes.filter(ptype =>
+    regex.test(ptype)
+  )
+  const productTypeSection = {
+    title: 'Products',
+    items: productTypesFiltered
+  }
 
   return categoriesSection.items.length === 0 &&
     assembliesSection.items.length === 0 &&
-    sectionsSection.items.length === 0
+    sectionsSection.items.length === 0 &&
+    productTypeSection.items.length === 0
     ? []
-    : [categoriesSection, assembliesSection, sectionsSection]
+    : [
+        assembliesSection,
+        sectionsSection,
+        categoriesSection,
+        productTypeSection
+      ]
 }
 
 const getSuggestionValue = suggestion =>
-  `${cv(suggestion.familyId)} ${cv(suggestion.name)} ${cv(
-    suggestion.code
-  )} ${cv(suggestion.description)}`
+  `${cv(suggestion.familyId)}${cv(suggestion.name)}${cv(suggestion.code)}${cv(
+    suggestion.description
+  )}${pt(suggestion)}`
+const cv = prop => (prop === undefined || null ? '' : `${prop} `)
+const pt = suggestion => (typeof suggestion === 'string' ? suggestion : '')
 
-const cv = prop => {
-  if (prop === undefined || null) return ''
-  else return prop
-}
-
-const renderSuggestion = suggestion => {
+const renderSuggestionBasic = suggestion => {
   return <span>{suggestion}</span>
 }
 
-const renderSuggestionSpecial = (suggestion, { query }) => {
-  const suggestionText = `${suggestion.familyId} ${suggestion.name} ${
-    suggestion.code
-  } ${suggestion.description}`
+const renderSuggestion = (suggestion, { query }) => {
+  const suggestionText = suggestion
   const matches = AutosuggestHighlightMatch(suggestionText, query)
   const parts = AutosuggestHighlightParse(suggestionText, matches)
 
@@ -170,6 +173,7 @@ const CATEGORIES_QUERY = gql`
       familyId
       name
     }
+    allProductTypes
   }
 `
 export default graphql(CATEGORIES_QUERY, { name: 'getAll' })(Search)

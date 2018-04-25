@@ -22,7 +22,10 @@ export class ProductFamilyListA extends Component {
       return <div> no associate families </div>
     return (
       <div className="ProductFamilyListA">
-        <h3>{this.props.getAll.uniformatClassification.code}</h3>
+        <h3>
+          {this.props.getAll.uniformatClassification.code}:{' '}
+          {this.props.getAll.uniformatClassification.description}
+        </h3>
         {ProductFamilysToRender.map(productFamily => (
           <ProductFamily key={productFamily.id} productFamily={productFamily} />
         ))}
@@ -40,6 +43,7 @@ const PRODUCTFAMILIES_QUERY = gql`
   query GetPFs($assemblieId: String!) {
     uniformatClassification(id: $assemblieId) {
       code
+      description
       associatedFamilies {
         id
         familyId
