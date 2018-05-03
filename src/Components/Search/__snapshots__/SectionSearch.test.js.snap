@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Search it at least shallow renders and match snapshot 1`] = `
+exports[`SectionSearch it at least shallow renders and match snapshot 1`] = `
 <div
-  className="Search"
+  className="SectionSearch"
 >
   <h3>
-    Search All
+    Search Sections
   </h3>
   <Autosuggest
     alwaysRenderSuggestions={false}
