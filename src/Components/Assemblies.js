@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AssemblyList from './AssemblyList'
 import AssemblyCrumb from './AssemblyCrumb'
 import ProductFamilyListA from './ProductFamilyListA'
+import { AssemblyChildSearch } from './Search/AsChild/AssemblyChildSearch'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 /*
@@ -64,6 +65,7 @@ export class Assemblies extends Component {
     //clearing the selection effectively gets you back to the top of the tree
     return (
       <div className="Assemblies">
+        <AssemblyChildSearch getAll={this.props.getAll} />
         <button onClick={e => this.setSelected(initialState.selected)}>
           Top
         </button>

@@ -16,7 +16,7 @@ function escapeRegexCharacters(str) {
 
 const getSuggestions = (value, items) => {
   const escapedValue = escapeRegexCharacters(value.trim().toLowerCase())
-  const regex = new RegExp(escapedValue, 'i')
+  const regex = new RegExp('^' + escapedValue, 'i')
 
   if (escapedValue === '' || escapedValue.length < 3) {
     return []
@@ -43,19 +43,33 @@ const getSuggestions = (value, items) => {
     items: sectionsFiltered
   }
 
+  const productTypesFiltered = items.allProductTypes.filter(ptype =>
+    regex.test(ptype)
+  )
+  const productTypeSection = {
+    title: 'Products',
+    items: productTypesFiltered
+  }
+
   return categoriesSection.items.length === 0 &&
     assembliesSection.items.length === 0 &&
-    sectionsSection.items.length === 0
+    sectionsSection.items.length === 0 &&
+    productTypeSection.items.length === 0
     ? []
-    : [assembliesSection, sectionsSection, categoriesSection]
+    : [
+        assembliesSection,
+        sectionsSection,
+        categoriesSection,
+        productTypeSection
+      ]
 }
 //sub-product families, product sub-types, product-groups
 const getSuggestionValue = suggestion =>
   `${cv(suggestion.familyId)}${cv(suggestion.name)}${cv(suggestion.code)}${cv(
     suggestion.description
-  )}`
+  )}${pt(suggestion)}`
 const cv = prop => (prop === undefined || null ? '' : `${prop} `)
-
+const pt = suggestion => (typeof suggestion === 'string' ? suggestion : '')
 const renderSuggestion = (suggestion, { query }) => {
   const suggestionText = suggestion
   const matches = AutosuggestHighlightMatch(suggestionText, query)
@@ -175,6 +189,7 @@ const CATEGORIES_QUERY = gql`
       familyId
       name
     }
+    allProductTypes
   }
 `
 export default graphql(CATEGORIES_QUERY, { name: 'getAll' })(Search)

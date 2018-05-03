@@ -79,6 +79,9 @@ export class SectionSearch extends Component {
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
+    console.log(
+      'where are the props? look: ' + JSON.stringify(this.props.getAll)
+    )
     this.setState({
       suggestions: getSuggestions(value, this.props.getAll)
     })
@@ -142,7 +145,7 @@ export class SectionSearch extends Component {
 This query gets all the ProductFamilies aka sections from content20 db
 the 'name' is the section title, while the id is the mf section#
 */
-const CATEGORIES_QUERY = gql`
+const SECTIONS_QUERY = gql`
   query GetSections {
     allProductFamilies {
       familyId
@@ -150,4 +153,4 @@ const CATEGORIES_QUERY = gql`
     }
   }
 `
-export default graphql(CATEGORIES_QUERY, { name: 'getAll' })(SectionSearch)
+export default graphql(SECTIONS_QUERY, { name: 'getAll' })(SectionSearch)

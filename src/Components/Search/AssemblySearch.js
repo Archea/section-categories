@@ -15,19 +15,14 @@ function escapeRegexCharacters(str) {
 }
 
 const getSuggestions = (value, items) => {
+  if (!items) console.log('Error no items! Look: ' + items)
   const escapedValue = escapeRegexCharacters(value.trim().toLowerCase())
   const regex = new RegExp(escapedValue, 'i')
 
-  if (escapedValue === '' || escapedValue.length < 3) {
+  if (escapedValue === '' || escapedValue.length < 2) {
     return []
   }
-  const categoriesFiltered = items.allProductFamilyCategories.filter(category =>
-    regex.test(category.name)
-  )
-  const categoriesSection = {
-    title: 'Categories',
-    items: categoriesFiltered
-  }
+
   const assembliesFiltered = items.allUniformatClassifications.filter(
     assembly => regex.test(assembly.code) || regex.test(assembly.description)
   )
@@ -35,25 +30,12 @@ const getSuggestions = (value, items) => {
     title: 'Assemblies',
     items: assembliesFiltered
   }
-  const sectionsFiltered = items.allProductFamilies.filter(
-    family => regex.test(family.familyId) || regex.test(family.name)
-  )
-  const sectionsSection = {
-    title: 'Sections',
-    items: sectionsFiltered
-  }
 
-  return categoriesSection.items.length === 0 &&
-    assembliesSection.items.length === 0 &&
-    sectionsSection.items.length === 0
-    ? []
-    : [assembliesSection, sectionsSection, categoriesSection]
+  return assembliesSection.items.length === 0 ? [] : [assembliesSection]
 }
 //sub-product families, product sub-types, product-groups
 const getSuggestionValue = suggestion =>
-  `${cv(suggestion.familyId)}${cv(suggestion.name)}${cv(suggestion.code)}${cv(
-    suggestion.description
-  )}`
+  `${cv(suggestion.code)}${cv(suggestion.description)}`
 const cv = prop => (prop === undefined || null ? '' : `${prop} `)
 
 const renderSuggestion = (suggestion, { query }) => {
@@ -82,7 +64,7 @@ const renderSectionTitle = section => <strong>{section.title}</strong>
 const getSectionSuggestions = section =>
   section.items.map(item => getSuggestionValue(item))
 
-export class Search extends Component {
+export class AssemblySearch extends Component {
   constructor(props) {
     super(props)
     this.state = initialState
@@ -99,6 +81,9 @@ export class Search extends Component {
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
+    console.log(
+      'where are the props? look: ' + JSON.stringify(this.props.getAll)
+    )
     this.setState({
       suggestions: getSuggestions(value, this.props.getAll)
     })
@@ -119,10 +104,15 @@ export class Search extends Component {
       onChange: this.onChange
     }
 
+    if (this.props.getAll && this.props.getAll.error) {
+      console.log('Get All error: ' + this.props.getAll.error)
+      return <div>Error</div>
+    }
+
     if (this.props.getAll && this.props.getAll.loading) {
       return (
-        <div className="Search">
-          <h3>Search All</h3>
+        <div className="AssemblySearch">
+          <h3>Assembly Search</h3>
           <input
             type="text"
             value={this.state.value}
@@ -135,14 +125,9 @@ export class Search extends Component {
       )
     }
 
-    if (this.props.getAll && this.props.getAll.error) {
-      console.log('Get All error: ' + this.props.getAll.error)
-      return <div>Error</div>
-    }
-
     return (
-      <div className="Search">
-        <h3>Search All</h3>
+      <div className="AssemblySearch">
+        <h3>AssemblySearch All</h3>
         <Autosuggest
           multiSection={true}
           suggestions={suggestions}
@@ -162,19 +147,12 @@ export class Search extends Component {
 This query gets all the ProductFamilies aka sections from content20 db
 the 'name' is the section title, while the id is the mf section#
 */
-const CATEGORIES_QUERY = gql`
-  query GetAllEverything {
-    allProductFamilyCategories {
-      name
-    }
+const ASSEMBLIES_QUERY = gql`
+  query GetAssemblies {
     allUniformatClassifications {
       description
       code
     }
-    allProductFamilies {
-      familyId
-      name
-    }
   }
 `
-export default graphql(CATEGORIES_QUERY, { name: 'getAll' })(Search)
+export default graphql(ASSEMBLIES_QUERY, { name: 'getAll' })(AssemblySearch)

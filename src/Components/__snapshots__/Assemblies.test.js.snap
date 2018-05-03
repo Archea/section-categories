@@ -4,6 +4,26 @@ exports[`Assemblies it at least shallow renders and match snapshot 1`] = `
 <div
   className="Assemblies"
 >
+  <AssemblyChildSearch
+    getAll={
+      Object {
+        "allUniformatClassifications": Array [
+          Object {
+            "code": "A",
+            "description": "SUBSTRUCTURE",
+            "id": "63ef3b02-faa5-44f5-a677-99775fdaeffb",
+            "level": 1,
+          },
+          Object {
+            "code": "A10",
+            "description": "FOUNDATIONS",
+            "id": "7777f4e9-bc0d-45cf-b66d-b97ad4638dc0",
+            "level": 2,
+          },
+        ],
+      }
+    }
+  />
   <button
     onClick={[Function]}
   >

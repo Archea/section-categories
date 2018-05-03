@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import Autosuggest from 'react-autosuggest'
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match'
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse'
@@ -15,19 +13,14 @@ function escapeRegexCharacters(str) {
 }
 
 const getSuggestions = (value, items) => {
+  if (!items) console.log('Error no items! Look: ' + items)
   const escapedValue = escapeRegexCharacters(value.trim().toLowerCase())
   const regex = new RegExp(escapedValue, 'i')
 
-  if (escapedValue === '' || escapedValue.length < 3) {
+  if (escapedValue === '' || escapedValue.length < 2) {
     return []
   }
-  const categoriesFiltered = items.allProductFamilyCategories.filter(category =>
-    regex.test(category.name)
-  )
-  const categoriesSection = {
-    title: 'Categories',
-    items: categoriesFiltered
-  }
+
   const assembliesFiltered = items.allUniformatClassifications.filter(
     assembly => regex.test(assembly.code) || regex.test(assembly.description)
   )
@@ -35,25 +28,12 @@ const getSuggestions = (value, items) => {
     title: 'Assemblies',
     items: assembliesFiltered
   }
-  const sectionsFiltered = items.allProductFamilies.filter(
-    family => regex.test(family.familyId) || regex.test(family.name)
-  )
-  const sectionsSection = {
-    title: 'Sections',
-    items: sectionsFiltered
-  }
 
-  return categoriesSection.items.length === 0 &&
-    assembliesSection.items.length === 0 &&
-    sectionsSection.items.length === 0
-    ? []
-    : [assembliesSection, sectionsSection, categoriesSection]
+  return assembliesSection.items.length === 0 ? [] : [assembliesSection]
 }
 //sub-product families, product sub-types, product-groups
 const getSuggestionValue = suggestion =>
-  `${cv(suggestion.familyId)}${cv(suggestion.name)}${cv(suggestion.code)}${cv(
-    suggestion.description
-  )}`
+  `${cv(suggestion.code)}${cv(suggestion.description)}`
 const cv = prop => (prop === undefined || null ? '' : `${prop} `)
 
 const renderSuggestion = (suggestion, { query }) => {
@@ -82,7 +62,7 @@ const renderSectionTitle = section => <strong>{section.title}</strong>
 const getSectionSuggestions = section =>
   section.items.map(item => getSuggestionValue(item))
 
-export class Search extends Component {
+export class AssemblyChildSearch extends Component {
   constructor(props) {
     super(props)
     this.state = initialState
@@ -119,10 +99,15 @@ export class Search extends Component {
       onChange: this.onChange
     }
 
+    if (this.props.getAll && this.props.getAll.error) {
+      console.log('Get All error: ' + this.props.getAll.error)
+      return <div>Error</div>
+    }
+
     if (this.props.getAll && this.props.getAll.loading) {
       return (
-        <div className="Search">
-          <h3>Search All</h3>
+        <div className="AssemblyChildSearch">
+          <h4>Search</h4>
           <input
             type="text"
             value={this.state.value}
@@ -135,14 +120,9 @@ export class Search extends Component {
       )
     }
 
-    if (this.props.getAll && this.props.getAll.error) {
-      console.log('Get All error: ' + this.props.getAll.error)
-      return <div>Error</div>
-    }
-
     return (
-      <div className="Search">
-        <h3>Search All</h3>
+      <div className="AssemblyChildSearch">
+        <h4>Search</h4>
         <Autosuggest
           multiSection={true}
           suggestions={suggestions}
@@ -158,23 +138,5 @@ export class Search extends Component {
     )
   }
 }
-/*
-This query gets all the ProductFamilies aka sections from content20 db
-the 'name' is the section title, while the id is the mf section#
-*/
-const CATEGORIES_QUERY = gql`
-  query GetAllEverything {
-    allProductFamilyCategories {
-      name
-    }
-    allUniformatClassifications {
-      description
-      code
-    }
-    allProductFamilies {
-      familyId
-      name
-    }
-  }
-`
-export default graphql(CATEGORIES_QUERY, { name: 'getAll' })(Search)
+
+export default AssemblyChildSearch
