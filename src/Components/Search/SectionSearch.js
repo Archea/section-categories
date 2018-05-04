@@ -16,7 +16,10 @@ function escapeRegexCharacters(str) {
 
 const getSuggestions = (value, items) => {
   const escapedValue = escapeRegexCharacters(value.trim().toLowerCase())
-  const regex = new RegExp(escapedValue, 'i')
+  const regex =
+    escapedValue.length < 3
+      ? new RegExp('^' + escapedValue, 'i')
+      : new RegExp(escapedValue, 'i')
 
   if (escapedValue === '' || escapedValue.length < 2) {
     return []
@@ -110,7 +113,7 @@ export class SectionSearch extends Component {
     if (this.props.getAll && this.props.getAll.loading) {
       return (
         <div className="Search">
-          <h3>Search All</h3>
+          <h3>Search Sections</h3>
           <input
             type="text"
             value={this.state.value}

@@ -15,9 +15,12 @@ function escapeRegexCharacters(str) {
 const getSuggestions = (value, items) => {
   if (!items) console.log('Error no items! Look: ' + items)
   const escapedValue = escapeRegexCharacters(value.trim().toLowerCase())
-  const regex = new RegExp(escapedValue, 'i')
+  const regex =
+    escapedValue.length < 3
+      ? new RegExp('^' + escapedValue, 'i')
+      : new RegExp(escapedValue, 'i')
 
-  if (escapedValue === '' || escapedValue.length < 2) {
+  if (escapedValue === '') {
     return []
   }
 

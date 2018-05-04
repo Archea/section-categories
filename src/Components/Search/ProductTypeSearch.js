@@ -16,9 +16,12 @@ function escapeRegexCharacters(str) {
 
 const getSuggestions = (value, items) => {
   const escapedValue = escapeRegexCharacters(value.trim().toLowerCase())
-  const regex = new RegExp('^' + escapedValue, 'i')
+  const regex =
+    escapedValue.length < 3
+      ? new RegExp('^' + escapedValue, 'i')
+      : new RegExp(escapedValue, 'i')
 
-  if (escapedValue === '' || escapedValue.length < 3) {
+  if (escapedValue === '' || escapedValue.length < 2) {
     return []
   }
   const categoriesFiltered = items.allProductFamilyCategories.filter(category =>
