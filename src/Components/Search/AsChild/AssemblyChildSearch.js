@@ -35,8 +35,9 @@ const getSuggestions = (value, items) => {
   return assembliesSection.items.length === 0 ? [] : [assembliesSection]
 }
 //sub-product families, product sub-types, product-groups
-const getSuggestionValue = suggestion =>
+const getSuggestionDisplayValue = suggestion =>
   `${cv(suggestion.code)}${cv(suggestion.description)}`
+const getSuggestionValue = suggestion => `${suggestion}`
 const cv = prop => (prop === undefined || null ? '' : `${prop} `)
 
 const renderSuggestion = (suggestion, { query }) => {
@@ -63,7 +64,7 @@ const renderSuggestion = (suggestion, { query }) => {
 
 const renderSectionTitle = section => <strong>{section.title}</strong>
 const getSectionSuggestions = section =>
-  section.items.map(item => getSuggestionValue(item))
+  section.items.map(item => getSuggestionDisplayValue(item))
 
 export class AssemblyChildSearch extends Component {
   constructor(props) {

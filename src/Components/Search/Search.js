@@ -51,11 +51,12 @@ const getSuggestions = (value, items) => {
     : [assembliesSection, sectionsSection, categoriesSection]
 }
 //sub-product families, product sub-types, product-groups
-const getSuggestionValue = suggestion =>
+const getSuggestionDisplayValue = suggestion =>
   `${cv(suggestion.familyId)}${cv(suggestion.name)}${cv(suggestion.code)}${cv(
     suggestion.description
   )}`
 const cv = prop => (prop === undefined || null ? '' : `${prop} `)
+const getSuggestionValue = suggestion => `${suggestion}`
 
 const renderSuggestion = (suggestion, { query }) => {
   const suggestionText = suggestion
@@ -81,7 +82,7 @@ const renderSuggestion = (suggestion, { query }) => {
 
 const renderSectionTitle = section => <strong>{section.title}</strong>
 const getSectionSuggestions = section =>
-  section.items.map(item => getSuggestionValue(item))
+  section.items.map(item => getSuggestionDisplayValue(item))
 
 export class Search extends Component {
   constructor(props) {

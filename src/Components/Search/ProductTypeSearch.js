@@ -67,12 +67,13 @@ const getSuggestions = (value, items) => {
       ]
 }
 //sub-product families, product sub-types, product-groups
-const getSuggestionValue = suggestion =>
+const getSuggestionDisplayValue = suggestion =>
   `${cv(suggestion.familyId)}${cv(suggestion.name)}${cv(suggestion.code)}${cv(
     suggestion.description
   )}${pt(suggestion)}`
 const cv = prop => (prop === undefined || null ? '' : `${prop} `)
 const pt = suggestion => (typeof suggestion === 'string' ? suggestion : '')
+const getSuggestionValue = suggestion => `${suggestion}`
 const renderSuggestion = (suggestion, { query }) => {
   const suggestionText = suggestion
   const matches = AutosuggestHighlightMatch(suggestionText, query)
@@ -97,7 +98,7 @@ const renderSuggestion = (suggestion, { query }) => {
 
 const renderSectionTitle = section => <strong>{section.title}</strong>
 const getSectionSuggestions = section =>
-  section.items.map(item => getSuggestionValue(item))
+  section.items.map(item => getSuggestionDisplayValue(item))
 
 export class Search extends Component {
   constructor(props) {
