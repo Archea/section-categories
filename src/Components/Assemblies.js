@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AssemblyList from './AssemblyList'
 import AssemblyCrumb from './AssemblyCrumb'
 import ProductFamilyListA from './ProductFamilyListA'
-import { AssemblyChildSearch } from './Search/AsChild/AssemblyChildSearch'
+import { CodeChildSearch } from './Search/AsChild/CodeChildSearch'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 /*
@@ -15,7 +15,8 @@ const initialState = {
     description: '',
     code: '',
     level: 0
-  }
+  },
+  showList: false
 }
 
 export class Assemblies extends Component {
@@ -25,6 +26,13 @@ export class Assemblies extends Component {
     this.setState(state => {
       return { ...state, selected: selection }
     })
+  }
+  //Set the selection with by code string
+  selectByCode = code => {
+    const setTo = this.props.getAll.allUniformatClassifications.find(
+      a => a.code === code
+    )
+    this.setSelected(setTo)
   }
   /*
     this decomposes the current crumb by level
@@ -39,6 +47,12 @@ export class Assemblies extends Component {
       a => a.code === code
     )
     this.setSelected(setTo)
+  }
+
+  toggleShowList = event => {
+    this.setState(state => {
+      return { ...state, showList: !state.showList }
+    })
   }
 
   render() {
@@ -62,22 +76,38 @@ export class Assemblies extends Component {
       ) : (
         <ProductFamilyListA assemblieId={this.state.selected.id} />
       )
-    //clearing the selection effectively gets you back to the top of the tree
-    return (
-      <div className="Assemblies">
-        <AssemblyChildSearch getAll={this.props.getAll} />
-        <button onClick={e => this.setSelected(initialState.selected)}>
-          Top
-        </button>
-        <AssemblyCrumb
-          selected={this.state.selected}
-          onCrumb={this.selectCrumb}
-        />
+    const list = this.state.showList ? (
+      <div>
+        <button onClick={e => this.toggleShowList(e)}>></button>
         <AssemblyList
           assemblies={assemblies}
           selected={this.state.selected}
           select={this.setSelected}
         />
+      </div>
+    ) : (
+      <div>
+        <button onClick={e => this.toggleShowList(e)}>></button>
+      </div>
+    )
+    const more = this.state.selected.level > 4 ? null : list
+    //clearing the selection effectively gets you back to the top of the tree
+    return (
+      <div className="Assemblies">
+        <CodeChildSearch
+          getAll={this.props.getAll}
+          select={this.selectByCode}
+        />
+        <div className="AssembliesPick">
+          <button onClick={e => this.setSelected(initialState.selected)}>
+            Top
+          </button>
+          <AssemblyCrumb
+            selected={this.state.selected}
+            onCrumb={this.selectCrumb}
+          />
+          {more}
+        </div>
         {productFamilies}
       </div>
     )

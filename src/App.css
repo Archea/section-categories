@@ -50,16 +50,53 @@
   margin: 2px;
 }
 
-.AssemblyList {
-
+.Assemblies {
+  display: inline-block;
 }
 
-.Assembly {
+.AssemblyList {
+  position: absolute;
+  display: inline;
+  background-color: #DFDFDF;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  float: left;
+}
+
+.AssembliesPick button {
+  height: 30px;
+}
+
+.AssembliesPick {
+  display: flex;
+  flex-direction: row;
   background-color: #DFDFDF;
   padding: 6px;
   border: 2px;
   margin: 2px;
 }
+.AssembliesPick:hover .AssemblyList {
+  display: inline;
+}
+
+.AssemblyCrumb {
+
+  display: block;
+}
+
+.Assembly {
+  background-color: #DFDFDF;
+  padding: 2px;
+  border: 2px;
+  margin: 2px;
+  display: block;
+  cursor: pointer;
+}
+
+.Assembly:hover {background-color: #CCC}
 
 .ProductFamily {
   box-sizing: border-box;
