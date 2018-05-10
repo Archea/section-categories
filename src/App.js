@@ -4,6 +4,9 @@ import CategoryList from './Components/CategoryList'
 import Assemblies from './Components/Assemblies'
 import Header from './Components/Header'
 import ProductFamilyList from './Components/ProductFamilyList'
+import Search from './Components/Search/Search'
+import AssemblySearch from './Components/Search/AssemblySearch'
+import SectionSearch from './Components/Search/SectionSearch'
 import { Route } from 'react-router-dom'
 
 class App extends Component {
@@ -12,8 +15,11 @@ class App extends Component {
       <div className="center w85">
         <Header />
         <div className="SelectionArea">
-          <Route exact path="/" component={CategoryList} />
+          <Route exact path="/" component={Assemblies} />
+          <Route exact path="/All" component={Search} />
+          <Route exact path="/Sections" component={SectionSearch} />
           <Route exact path="/Assemblies" component={Assemblies} />
+          <Route exact path="/AssemblySearch" component={AssemblySearch} />
           <Route path="/:area/:id" component={CategoryList} />
           <Route
             path="/Category/:id"
@@ -29,5 +35,4 @@ class App extends Component {
     )
   }
 }
-//"48390048-1a4e-4a06-8f1e-ab8fcfc4ad1f"
 export default App
