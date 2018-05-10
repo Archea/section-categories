@@ -26,7 +26,7 @@ class AssemblyCrumb extends Component {
           {levels.map(
             l =>
               l.text === '' ? (
-                '.'
+                ''
               ) : (
                 <button
                   key={l.level}

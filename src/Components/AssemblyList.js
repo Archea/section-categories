@@ -19,6 +19,9 @@ export class AssemblyList extends Component {
         </div>
       )
     }
+    if (SplitAssmblies(assembliesToRender, this.props.selected).length === 0) {
+      return <div className="emptyList"> none </div>
+    }
     //Render this when there is a selection and it is in a valid level range
     if (
       this.props.selected &&

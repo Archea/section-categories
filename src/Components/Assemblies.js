@@ -78,7 +78,7 @@ export class Assemblies extends Component {
       )
     const list = this.state.showList ? (
       <div>
-        <button onClick={e => this.toggleShowList(e)}>></button>
+        <button onClick={e => this.toggleShowList(e)}>...</button>
         <AssemblyList
           assemblies={assemblies}
           selected={this.state.selected}
@@ -87,7 +87,7 @@ export class Assemblies extends Component {
       </div>
     ) : (
       <div>
-        <button onClick={e => this.toggleShowList(e)}>></button>
+        <button onClick={e => this.toggleShowList(e)}>...</button>
       </div>
     )
     const more = this.state.selected.level > 4 ? null : list

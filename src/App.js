@@ -15,7 +15,7 @@ class App extends Component {
       <div className="center w85">
         <Header />
         <div className="SelectionArea">
-          <Route exact path="/" component={Search} />
+          <Route exact path="/" component={Assemblies} />
           <Route exact path="/All" component={Search} />
           <Route exact path="/Sections" component={SectionSearch} />
           <Route exact path="/Assemblies" component={Assemblies} />
