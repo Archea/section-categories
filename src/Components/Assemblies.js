@@ -5,6 +5,7 @@ import ProductFamilyListA from './ProductFamilyListA'
 import { CodeChildSearch } from './Search/AsChild/CodeChildSearch'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import AssembliesJSON from '../some.json'
 /*
   an emptly assembly object this is the only state of
   the assembly component tree
@@ -16,7 +17,8 @@ const initialState = {
     code: '',
     level: 0
   },
-  showList: false
+  showList: false,
+  selections: []
 }
 
 export class Assemblies extends Component {
@@ -29,7 +31,7 @@ export class Assemblies extends Component {
   }
   //Set the selection with by code string
   selectByCode = code => {
-    const setTo = this.props.getAll.allUniformatClassifications.find(
+    const setTo = AssembliesJSON.data.allUniformatClassifications.find(
       a => a.code === code
     )
     this.setSelected(setTo)
@@ -43,7 +45,7 @@ export class Assemblies extends Component {
   selectCrumb = level => {
     if (level === 0) this.setSelected(initialState)
     const code = this.state.selected.code.slice(0, CodeSlice(level))
-    const setTo = this.props.getAll.allUniformatClassifications.find(
+    const setTo = AssembliesJSON.data.allUniformatClassifications.find(
       a => a.code === code
     )
     this.setSelected(setTo)
@@ -55,26 +57,28 @@ export class Assemblies extends Component {
     })
   }
 
-  render() {
-    if (this.props.getAll && this.props.getAll.loading) {
-      return <div>Loading</div>
-    }
+  addSelected = () => {
+    this.setState(state => {
+      return {
+        ...state,
+        selections: [...this.state.selections, this.state.selected]
+      }
+    })
+  }
 
-    if (this.props.getAll && this.props.getAll.error) {
-      console.log('Get All Assemblies error: ' + this.props.getAll.error)
-      return <div>Error</div>
-    }
-    //This should always return, the content service is down if it fails
-    const assemblies = this.props.getAll.allUniformatClassifications
+  render() {
+    const assemblies = AssembliesJSON.data.allUniformatClassifications
     if (!assemblies) {
       return <div>Error no assemblies !!</div>
     }
     //Don't make a list with an empty id, aka no selection, avoid call and render
     const productFamilies =
-      this.state.selected.id === '' ? (
+      this.state.selections.length === 0 ? (
         <div>none selected</div>
       ) : (
-        <ProductFamilyListA assemblieId={this.state.selected.id} />
+        this.state.selections.map(assembly => (
+          <ProductFamilyListA assemblieId={assembly.id} key={assembly.id} />
+        ))
       )
     const list = this.state.showList ? (
       <div>
@@ -94,10 +98,7 @@ export class Assemblies extends Component {
     //clearing the selection effectively gets you back to the top of the tree
     return (
       <div className="Assemblies">
-        <CodeChildSearch
-          getAll={this.props.getAll}
-          select={this.selectByCode}
-        />
+        <CodeChildSearch getAll={AssembliesJSON} select={this.selectByCode} />
         <div className="AssembliesPick">
           <button onClick={e => this.setSelected(initialState.selected)}>
             Top
@@ -108,6 +109,7 @@ export class Assemblies extends Component {
           />
           {more}
         </div>
+        <button onClick={this.addSelected}>Add Selected</button>
         {productFamilies}
       </div>
     )
@@ -136,15 +138,4 @@ const CodeSlice = level => {
   }
 }
 
-//this is the graphql query to get all the assemblies
-const ASSEMBLIES_QUERY = gql`
-  query GetAll {
-    allUniformatClassifications {
-      id
-      description
-      code
-      level
-    }
-  }
-`
-export default graphql(ASSEMBLIES_QUERY, { name: 'getAll' })(Assemblies)
+export default Assemblies

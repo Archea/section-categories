@@ -19,7 +19,15 @@ export class ProductFamilyListA extends Component {
     const ProductFamilysToRender = this.props.getAll.uniformatClassification
       .associatedFamilies
     if (ProductFamilysToRender.length === 0)
-      return <div> no associate families </div>
+      return (
+        <div>
+          <h3>
+            {this.props.getAll.uniformatClassification.code}:
+            {this.props.getAll.uniformatClassification.description}
+          </h3>
+          no associate families
+        </div>
+      )
     return (
       <div className="ProductFamilyListA">
         <h3>

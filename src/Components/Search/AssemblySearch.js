@@ -153,7 +153,9 @@ the 'name' is the section title, while the id is the mf section#
 */
 const ASSEMBLIES_QUERY = gql`
   query GetAssemblies {
-    allUniformatClassifications {
+    allUniformatClassifications(
+      firmId: "ec7782f7-d919-4a58-bb8e-fe888633481f"
+    ) {
       description
       code
     }
